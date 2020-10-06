@@ -183,12 +183,12 @@ LAnim ANIM_FIREBALL;
 int xLast[99], yLast[99];
 
 bool checkCollision(SDL_Rect a, SDL_Rect b);
-void processRecivedPacket(string data);
-void sendPacketToClient(int socket, string data);
+void processRecivedPacket(const string &data);
+void sendPacketToClient(int socket, const string &data);
 
 LWindow gWindow(1280, 300);
 
-bool getPhysicsReady(int type)
+bool getPhysicsReady(const int type)
 {
 	if (PHYSICS_TYPE_PROJECTILES == type)
 	{
@@ -284,7 +284,7 @@ int sendRemovePacket(int rSocket)
 	return 0;
 }
 
-void sendPacketToClient(int socket, string data)
+void sendPacketToClient(int socket, const string &data)
 {
 	iResult = send(ClientSocket[socket], data.c_str(), (int)strlen(data.c_str()), 0);
 	if (iResult == SOCKET_ERROR)
@@ -999,7 +999,7 @@ static int sendDataToClient(void* ptr)
 	}
 }
 
-void processRecivedPacket(string data)
+void processRecivedPacket(const string &data)
 {
 	bool TASK_DONE = false;
 	int ARID;
