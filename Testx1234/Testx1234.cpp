@@ -51,15 +51,15 @@ struct engineParameters
 
 	struct BOOLEAN
 	{
-		bool sendRemovePacket = false;
-		bool addClient = false;
-		bool playerDamage = false;
-		bool updateMatching = false;
-		bool matchOver = false;
-		bool updateMatch = false;
-		bool isSendThreadActive = false;
-		bool isPhysicsThreadActive = false;
-		bool isReciveThreadActive = false;
+		bool SEND_REMOVE_PACKET = false;
+		bool ADD_CLIENT = false;
+		bool DAMAGE_PLAYER = false;
+		bool UPDATE_MATCHING = false;
+		bool MATCH_OVER = false;
+		bool UPDATE_MATCH = false;
+		bool SEND_THREAD_ACTIVE = false;
+		bool PHYSICS_THREAD_ACTIVE = false;
+		bool RECIVE_THREAD_ACTIVE = false;
 
 	}EXECUTE;
 
@@ -277,7 +277,7 @@ int sendRemovePacket(int rSocket)
 	MEM.OBJ.Player[rSocket].setID("-1");
 	ClientSocket[rSocket] = INVALID_SOCKET;
 
-	EP.EXECUTE.updateMatch = true;
+	EP.EXECUTE.UPDATE_MATCH = true;
 
 	cout << endl << "Dissconected: " << rSocket;
 
@@ -290,7 +290,7 @@ void sendPacketToClient(int socket, const string &data)
 	if (iResult == SOCKET_ERROR)
 	{
 		cout << endl << "send failed: " << data << " ["<< WSAGetLastError() <<"]";
-		EP.EXECUTE.sendRemovePacket = true;
+		EP.EXECUTE.SEND_REMOVE_PACKET = true;
 		removeID = socket;
 		MEM.OBJ.Player[socket].setSlotUsed(false);
 	}
@@ -431,7 +431,7 @@ int processClientData()
 										MEM.OBJ.Player[MEM.OBJ.Match[i].getPlayerID(j)].gProjectile[k].setSlotFree(true);
 										MEM.OBJ.Player[MEM.OBJ.Match[i].getPlayerID(j2)].damageTarget(MEM.OBJ.Player[MEM.OBJ.Match[i].getPlayerID(j)].gProjectile[k].getDMG());
 
-										EP.EXECUTE.playerDamage = true;
+										EP.EXECUTE.DAMAGE_PLAYER = true;
 										EP.TEMP.damageGiverID = MEM.OBJ.Match[i].getPlayerID(j); // the one that did the damage
 										EP.TEMP.damageTargetID = MEM.OBJ.Match[i].getPlayerID(j2); // the one damaged
 										EP.TEMP.damageAmount = MEM.OBJ.Player[MEM.OBJ.Match[i].getPlayerID(j)].gProjectile[k].getDMG();
@@ -452,66 +452,8 @@ int processClientData()
 			}
 		}
 	}
-
-
-	/*
-	for (unsigned int i = 0; i < MAX_PLAYER_ENTITY; i++)
-	{
-		if (MEM.OBJ.Player[i].getSlotUsed())
-		{
-			for (unsigned int j = 0; j < MAX_PLAYER_ENTITY; j++)
-			{
-				if (MEM.OBJ.Player[j].getSlotUsed() && MEM.OBJ.Player[i].getmID() == MEM.OBJ.Player[j].getmID() && i != j)
-				{
-					//CHECK PROJECTILE COLLISIONS
-
-					for (unsigned int k = 0; k < MAX_PLAYER_BULLET_COUNT; k++)
-					{
-						if (!MEM.OBJ.Player[i].gProjectile[k].getSlotFree())
-						{
-							for (unsigned int l = 0; l < MAX_PLAYER_BULLET_COUNT; l++)
-							{
-								if (!MEM.OBJ.Player[j].gProjectile[l].getSlotFree())
-								{
-									if (checkCollision(MEM.OBJ.Player[i].gProjectile[k].getCollisionRect(), MEM.OBJ.Player[j].gProjectile[l].getCollisionRect()))
-									{
-										MEM.OBJ.Player[j].gProjectile[l].setSlotFree(true);
-										MEM.OBJ.Player[i].gProjectile[k].setSlotFree(true);
-
-										ANIM_FIREBALL.setCurrentTickClient(i, k, 0);
-										ANIM_FIREBALL.setCurrentTickClient(j, l, 0);
-									}
-								}
-							}
-							if (checkCollision(MEM.OBJ.Player[j].getCollisionRect(), MEM.OBJ.Player[i].gProjectile[k].getCollisionRect()))
-							{
-								ANIM_FIREBALL.setCurrentTickClient(i, k, 0);
-
-								MEM.OBJ.Player[i].gProjectile[k].setSlotFree(true);
-								MEM.OBJ.Player[j].damageTarget(MEM.OBJ.Player[i].gProjectile[k].getDMG());
-
-								EP.EXECUTE.playerDamage = true;
-								EP.TEMP.damageGiverID = i; // the one that did the damage
-								EP.TEMP.damageTargetID = j; // the one damaged
-								EP.TEMP.damageAmount = MEM.OBJ.Player[i].gProjectile[k].getDMG();
-
-								//CHECK IF PLAYERS DEAD
-
-								if (MEM.OBJ.Player[j].getHealth() < 1)
-								{
-								//	MEM.OBJ.Player[j].setPlayerDead(true);
-								//	EP.TEMP.killShot = true;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	*/
 	
-	if (EP.EXECUTE.updateMatch)
+	if (EP.EXECUTE.UPDATE_MATCH)
 	{
 		for (int i = 0; i < MAX_MATCHES; i++)
 		{
@@ -531,12 +473,12 @@ int processClientData()
 				}
 				if (EP.TEMP.sCount == 1)
 				{
-					EP.EXECUTE.matchOver = true;
+					EP.EXECUTE.MATCH_OVER = true;
 					EP.TEMP.matchID = i;
 				}
 			}
 		}
-		EP.EXECUTE.updateMatch = false;
+		EP.EXECUTE.UPDATE_MATCH = false;
 	}
 
 
@@ -751,13 +693,13 @@ static int recvDataFromClient(void* ptr)
 				}
 				else if (sResult == 0)
 				{
-					EP.EXECUTE.sendRemovePacket = true;
+					EP.EXECUTE.SEND_REMOVE_PACKET = true;
 					removeID = i;
 					MEM.OBJ.Player[i].setSlotUsed(false);
 				}
 				else if (sResult < 0)
 				{
-					EP.EXECUTE.sendRemovePacket = true;
+					EP.EXECUTE.SEND_REMOVE_PACKET = true;
 					removeID = i;
 					MEM.OBJ.Player[i].setSlotUsed(false);
 				}
@@ -780,12 +722,12 @@ static int sendDataToClient(void* ptr)
 
 		processClientData();
 
-		if (EP.EXECUTE.sendRemovePacket)
+		if (EP.EXECUTE.SEND_REMOVE_PACKET)
 		{
 			sendRemovePacket(removeID);
-			EP.EXECUTE.sendRemovePacket = false;
+			EP.EXECUTE.SEND_REMOVE_PACKET = false;
 		}
-		if (EP.EXECUTE.playerDamage)
+		if (EP.EXECUTE.DAMAGE_PLAYER)
 		{
 			EP.TEMP.iMatch = -1;
 			//PLDMG,[THE ONE DAMAGED],[THE ONE THAT DOES THE DAMAGE],[DAMAGE AMMOUNT]
@@ -815,17 +757,35 @@ static int sendDataToClient(void* ptr)
 
 			if (EP.TEMP.iMatch != -1)
 			{
-				for (unsigned int i = 0; i < MEM.OBJ.Match[EP.TEMP.iMatch].getPlayersMatching(); i++)
+				if (MEM.OBJ.Player[EP.TEMP.damageTargetID].getHealth() <= 0)
 				{
-					if (MEM.OBJ.Match[EP.TEMP.iMatch].getIfSlotUsed(i))
+					EP.TEMP.DATAPACKET.clear();
+					EP.TEMP.DATAPACKET.str(string());
+					EP.TEMP.DATAPACKET << KILL_PLAYER << "," << EP.TEMP.damageGiverID << "," << EP.TEMP.damageTargetID << "," << END_OF_PACKET;
+
+					for (unsigned int i = 0; i < MEM.OBJ.Match[EP.TEMP.iMatch].getPlayersMatching(); i++)
 					{
-						sendPacketToClient(MEM.OBJ.Match[EP.TEMP.iMatch].getPlayerID(i), EP.TEMP.DATAPACKET.str());
+						if (MEM.OBJ.Match[EP.TEMP.iMatch].getIfSlotUsed(i))
+						{
+							sendPacketToClient(MEM.OBJ.Match[EP.TEMP.iMatch].getPlayerID(i), EP.TEMP.DATAPACKET.str());
+						}
+					}
+				}
+				else
+				{
+					for (unsigned int i = 0; i < MEM.OBJ.Match[EP.TEMP.iMatch].getPlayersMatching(); i++)
+					{
+						if (MEM.OBJ.Match[EP.TEMP.iMatch].getIfSlotUsed(i))
+						{
+							sendPacketToClient(MEM.OBJ.Match[EP.TEMP.iMatch].getPlayerID(i), EP.TEMP.DATAPACKET.str());
+						}
 					}
 				}
 			}
-			EP.EXECUTE.playerDamage = false;
+
+			EP.EXECUTE.DAMAGE_PLAYER = false;
 		}
-		if (EP.EXECUTE.updateMatching)
+		if (EP.EXECUTE.UPDATE_MATCHING)
 		{
 			// IDENTIFIER, MATCH TYPE ,PLAYER ID(0),PLAYER NICKNAME(0)
 
@@ -882,9 +842,9 @@ static int sendDataToClient(void* ptr)
 					break;
 				}
 			}
-			EP.EXECUTE.updateMatching = false;
+			EP.EXECUTE.UPDATE_MATCHING = false;
 		}
-		if (EP.EXECUTE.matchOver)
+		if (EP.EXECUTE.MATCH_OVER)
 		{
 			EP.TEMP.DATAPACKET.clear();
 			EP.TEMP.DATAPACKET.str(string());
@@ -907,7 +867,7 @@ static int sendDataToClient(void* ptr)
 			}
 
 			MEM.OBJ.Match[EP.TEMP.matchID].resetMatch();
-			EP.EXECUTE.matchOver = false;
+			EP.EXECUTE.MATCH_OVER = false;
 
 			cout << endl << "MATCH TERMIANTED";
 		}
@@ -1032,7 +992,7 @@ void processRecivedPacket(const string &data)
 		}
 		addID = atoi(id.c_str());
 		addNick = nick;
-		EP.EXECUTE.addClient = true;
+		EP.EXECUTE.ADD_CLIENT = true;
 	}
 	else if (identifier == GET_DATA_ABOUT_PLAYER) //UPDATE PLAYER WITH INFO FROM CLIENT
 	{
@@ -1094,7 +1054,7 @@ void processRecivedPacket(const string &data)
 			{
 				MEM.OBJ.Player[i].setSlotUsed(false);
 				removeID = i;
-				EP.EXECUTE.sendRemovePacket = true;
+				EP.EXECUTE.SEND_REMOVE_PACKET = true;
 				break;
 			}
 		}
@@ -1125,7 +1085,7 @@ void processRecivedPacket(const string &data)
 								MEM.OBJ.Match[i].setIfIsWaitingForPlayer(false);
 								MEM.OBJ.Match[i].setIfReqLaunch(true);
 								MEM.OBJ.Player[EP.TEMP.relativeID].setmID(i);
-								EP.EXECUTE.updateMatching = true;
+								EP.EXECUTE.UPDATE_MATCHING = true;
 							}
 						}
 						else if (matchingType == FOUR_PLAYER)
@@ -1135,7 +1095,7 @@ void processRecivedPacket(const string &data)
 								MEM.OBJ.Match[i].setIfIsWaitingForPlayer(false);
 								MEM.OBJ.Match[i].setIfReqLaunch(true);
 								MEM.OBJ.Player[EP.TEMP.relativeID].setmID(i);
-								EP.EXECUTE.updateMatching = true;
+								EP.EXECUTE.UPDATE_MATCHING = true;
 							}
 						}
 						matchedPlayer = true;
