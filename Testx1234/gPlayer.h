@@ -34,7 +34,7 @@ public:
 	void setIfPlaying(bool b);
 	bool getIfPlaying();
 
-
+	void reset();
 	void setmID(int mID);
 	int getmID();
 	void damageTarget(int);

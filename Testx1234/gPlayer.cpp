@@ -8,6 +8,17 @@ gPlayer::gPlayer()
 	isPlaying = false;
 	isDead = false;
 	ID = "-1";
+	p_health = 100;
+}
+
+void gPlayer::reset()
+{
+	requireInit = false;
+	slotUsed = false;
+	isPlaying = false;
+	isDead = false;
+	ID = "-1";
+	p_health = 100;
 }
 
 void gPlayer::setPlayerPosX(int posX)

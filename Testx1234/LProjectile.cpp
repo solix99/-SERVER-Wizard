@@ -15,6 +15,9 @@ LProjectile::LProjectile()
 	mVelY = 5;
 	
 	slotFree = true;
+
+	p_DMG = 30;
+
 }
 SDL_Rect LProjectile::getmCollider()
 {

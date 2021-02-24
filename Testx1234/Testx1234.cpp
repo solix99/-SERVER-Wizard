@@ -440,8 +440,8 @@ int processClientData()
 
 										if (MEM.OBJ.Player[MEM.OBJ.Match[i].getPlayerID(j2)].getHealth() < 1)
 										{
-											//	MEM.OBJ.Player[j].setPlayerDead(true);
-											//	EP.TEMP.killShot = true;
+										//	MEM.OBJ.Player[j].setPlayerDead(true);
+										//	EP.TEMP.killShot = true;
 										}
 									}
 								}
@@ -770,6 +770,12 @@ static int sendDataToClient(void* ptr)
 							sendPacketToClient(MEM.OBJ.Match[EP.TEMP.iMatch].getPlayerID(i), EP.TEMP.DATAPACKET.str());
 						}
 					}
+
+					EP.TEMP.matchID = EP.TEMP.iMatch;
+					EP.TEMP.matchWinnerID = EP.TEMP.damageGiverID;
+					EP.EXECUTE.MATCH_OVER = true;
+
+					cout << endl << "Kill sent " << MEM.OBJ.Player[EP.TEMP.damageTargetID].getHealth();
 				}
 				else
 				{
@@ -866,10 +872,13 @@ static int sendDataToClient(void* ptr)
 				}
 			}
 
+			MEM.OBJ.Player[EP.TEMP.damageGiverID].reset();
+			MEM.OBJ.Player[EP.TEMP.damageTargetID].reset();
+
 			MEM.OBJ.Match[EP.TEMP.matchID].resetMatch();
 			EP.EXECUTE.MATCH_OVER = false;
 
-			cout << endl << "MATCH TERMIANTED";
+			//cout << endl << "MATCH TERMIANTED";
 		}
 
 		// SEND BASIC PLAYER DATA PER MATCH
@@ -1036,7 +1045,6 @@ void processRecivedPacket(const string &data)
 					}
 					if (TASK_DONE) break;
 				}
-
 				if (!collisionFound)
 				{
 					xLast[i] = atoi(posX.c_str());
