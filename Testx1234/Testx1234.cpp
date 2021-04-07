@@ -212,10 +212,12 @@ bool getPhysicsReady(const int type)
 
 int sendRemovePacket(int rSocket)
 {
+	int k = 0, tempID;
+
 	EP.TEMP.DATAPACKET.clear();
 	EP.TEMP.DATAPACKET.str(string());
 	EP.TEMP.DATAPACKET << DELETE_PLAYER << "," << MEM.OBJ.Player[rSocket].getID() << "," << MEM.OBJ.Player[rSocket].getNickname() << "," << END_OF_PACKET;
-	
+
 	EP.TEMP.iMatch = -1;
 
 	EP.TEMP.sComplete = false;
@@ -238,6 +240,21 @@ int sendRemovePacket(int rSocket)
 					break;
 				}
 			}
+
+			for (int j = 0; j < MAX_PLAYER_PER_MATCH; j++)
+			{
+				if (MEM.OBJ.Match[i].getIfSlotUsed(j))
+				{
+					tempID = MEM.OBJ.Match[i].getPlayerID(j);
+					k++;
+				}
+			}
+			if (k == 1)
+			{
+				EP.TEMP.matchWinnerID = tempID;
+			}
+
+
 		}
 		else if (MEM.OBJ.Match[i].getIfWaitingForPlayer())
 		{
@@ -436,13 +453,6 @@ int processClientData()
 										EP.TEMP.damageTargetID = MEM.OBJ.Match[i].getPlayerID(j2); // the one damaged
 										EP.TEMP.damageAmount = MEM.OBJ.Player[MEM.OBJ.Match[i].getPlayerID(j)].gProjectile[k].getDMG();
 
-										//CHECK IF PLAYERS DEAD
-
-										if (MEM.OBJ.Player[MEM.OBJ.Match[i].getPlayerID(j2)].getHealth() < 1)
-										{
-										//	MEM.OBJ.Player[j].setPlayerDead(true);
-										//	EP.TEMP.killShot = true;
-										}
 									}
 								}
 							}
@@ -467,7 +477,6 @@ int processClientData()
 
 					if (!MEM.OBJ.Match[i].getIsPlayerDead(j))
 					{
-						EP.TEMP.matchWinnerID = atoi(MEM.OBJ.Player[MEM.OBJ.Match[i].getPlayerID(j)].getID().c_str());
 						EP.TEMP.sCount++;
 					}
 				}
@@ -729,7 +738,6 @@ static int sendDataToClient(void* ptr)
 		}
 		if (EP.EXECUTE.DAMAGE_PLAYER)
 		{
-			EP.TEMP.iMatch = -1;
 			//PLDMG,[THE ONE DAMAGED],[THE ONE THAT DOES THE DAMAGE],[DAMAGE AMMOUNT]
 
 			EP.TEMP.DATAPACKET.clear();
@@ -748,6 +756,7 @@ static int sendDataToClient(void* ptr)
 						{
 							EP.TEMP.iMatch = i;
 							EP.TEMP.sComplete = true;
+
 							break;
 						}
 					}
@@ -755,7 +764,7 @@ static int sendDataToClient(void* ptr)
 				if (EP.TEMP.sComplete) break;
 			}
 
-			if (EP.TEMP.iMatch != -1)
+			if (EP.TEMP.sComplete)
 			{
 				if (MEM.OBJ.Player[EP.TEMP.damageTargetID].getHealth() <= 0)
 				{
@@ -788,6 +797,13 @@ static int sendDataToClient(void* ptr)
 					}
 				}
 			}
+
+			for (int i = 0; i < MEM.OBJ.Match[EP.TEMP.iMatch].getPlayersMatching(); i++)
+			{
+				cout<<endl<<MEM.OBJ.Player[MEM.OBJ.Match[EP.TEMP.iMatch].getPlayerID(i)].getHealth();
+
+			}
+
 
 			EP.EXECUTE.DAMAGE_PLAYER = false;
 		}
@@ -854,7 +870,9 @@ static int sendDataToClient(void* ptr)
 		{
 			EP.TEMP.DATAPACKET.clear();
 			EP.TEMP.DATAPACKET.str(string());
-			EP.TEMP.DATAPACKET << MATCH_RESULT << "," << EP.TEMP.matchWinnerID << "," << END_OF_PACKET;
+			EP.TEMP.DATAPACKET << MATCH_RESULT << "," << MEM.OBJ.Player[EP.TEMP.matchWinnerID].getID() << "," << END_OF_PACKET;
+
+			cout << endl << MEM.OBJ.Player[EP.TEMP.matchWinnerID].getNickname() << MEM.OBJ.Player[EP.TEMP.matchWinnerID].getID() << " WON";
 
 			for (int i = 0; i < MAX_MATCHES; i++)
 			{
