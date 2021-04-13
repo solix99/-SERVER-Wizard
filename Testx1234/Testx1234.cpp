@@ -27,12 +27,13 @@ WSADATA wData;
 #define SDL_TEMP_DELAY 50
 #define MAX_MATCHES 24
 #define MAX_PLAYER_ENTITY 99
+#define MAX_MAPS 10
 
 struct engineParameters
 {
 	struct ANIMATION
 	{
-		int FIREBALL_RENDERSPEED = 1000;
+		int FIREBALL_RENDERSPEED = 1000; 
 
 	}ANIM;
 
@@ -45,7 +46,7 @@ struct engineParameters
 
 		SDL_Event e;
 		int physicsRate = 20;
-		float projSpeed = 50.0f;
+		float projSpeed = 15.0f;
 
 	}GSYS;
 
@@ -119,6 +120,13 @@ struct MEMEORY
 	}OBJ;
 
 }MEM;
+
+struct MAPLIST
+{
+	string MAP_NAME[MAX_MAPS];
+	SDL_Point MAP_SIZE[MAX_MAPS];
+
+}MAPL;
 
 enum PhysicsType
 {
@@ -1173,8 +1181,11 @@ void processRecivedPacket(const string &data)
 						MEM.OBJ.Player[i].gProjectile[j].setPosY(atoi(posY.c_str()));
 						MEM.OBJ.Player[i].gProjectile[j].setDestX(atoi(posX2.c_str()));
 						MEM.OBJ.Player[i].gProjectile[j].setDestY(atoi(posY2.c_str()));
-						MEM.OBJ.Player[i].gProjectile[j].setVelX((atoi(posX2.c_str()) - atoi(posX.c_str())) / EP.GSYS.projSpeed);
-						MEM.OBJ.Player[i].gProjectile[j].setVelY((atoi(posY2.c_str()) - atoi(posY.c_str())) / EP.GSYS.projSpeed);
+
+						MEM.OBJ.Player[i].gProjectile[j].DISTANCE = sqrt(pow(atoi(posX2.c_str()) - atoi(posX.c_str()), 2) + pow(atoi(posY2.c_str()) - atoi(posY.c_str()), 2));
+
+						MEM.OBJ.Player[i].gProjectile[j].setVelX((EP.GSYS.projSpeed / MEM.OBJ.Player[i].gProjectile[j].DISTANCE)* (atoi(posX2.c_str()) - atoi(posX.c_str())));
+						MEM.OBJ.Player[i].gProjectile[j].setVelY((EP.GSYS.projSpeed / MEM.OBJ.Player[i].gProjectile[j].DISTANCE)* (atoi(posY2.c_str()) - atoi(posY.c_str())));
 
 						newProjectilePlayerID = i;
 						newProjectileID = j;
