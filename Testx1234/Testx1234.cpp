@@ -1017,13 +1017,10 @@ static int sendDataToClient(void* ptr)
 
 void processRecivedPacket(const string &encryptedData)
 {
+	EP.TEMP.DECRYPT_DATA = encryptedData;
+
 	bool TASK_DONE = false;
 	int ARID;
-
-	//cout << endl << encryptedData;
-
-	MEM.OBJ.Crypto.decryptData(encryptedData);
-	EP.TEMP.DECRYPT_DATA = MEM.OBJ.Crypto.getData();
 
 	//cout << endl << EP.TEMP.DECRYPT_DATA << "- DECRYPTED DATA";
 

@@ -8,70 +8,66 @@ LCrypto::LCrypto()
 
     bool isPrime = false;
 
-    publicKey_ = 11;
+    int p = rand() % 1000 + 70;
+    int q = rand() % 1000 + 70;
 
-    while (publicKey_ > 10)
+    while (!isPrime)
     {
-        int p = rand() % 100 + 7;
-        int q = rand() % 100 + 7;
-
-        while (!isPrime)
+        p++;
+        for (unsigned int i = 2; i <= p / 2; ++i)
         {
-            p++;
-            for (unsigned int i = 2; i <= p / 2; ++i)
+            isPrime = true;
+            if (p % i == 0)
             {
-                isPrime = true;
-                if (p % i == 0)
-                {
-                    isPrime = false;
-                    break;
-                }
-            }
-        }
-
-        isPrime = false;
-
-        while (!isPrime)
-        {
-            q++;
-            for (unsigned int i = 2; i <= p / 2; ++i)
-            {
-                isPrime = true;
-                if (q % i == 0)
-                {
-                    isPrime = false;
-                    break;
-                }
-            }
-        }
-
-        double track;
-        nModulus_ = p * q;
-        double phi = (p - 1) * (q - 1);
-
-        //public key e
-
-        publicKey_ = 7;
-
-        while (publicKey_ < phi)
-        {
-            track = gcd(publicKey_, phi);
-
-            if (track == 1)
-            {
+                isPrime = false;
                 break;
             }
-            else
+        }
+    }
+
+    isPrime = false;
+
+    while (!isPrime)
+    {
+        q++;
+        for (unsigned int i = 2; i <= p / 2; ++i)
+        {
+            isPrime = true;
+            if (q % i == 0)
             {
-                publicKey_++;
+                isPrime = false;
+                break;
             }
         }
-        //private key
-        //choosing d such that it satisfies d*e = 1 mod phi
-
-        double d1 = 1 / publicKey_;
-        privateKey_ = fmod(d1, phi);
     }
+
+    double track;
+    nModulus_ = p * q;
+    double phi = (p - 1) * (q - 1);
+
+    //public key e
+
+    publicKey_ = 7;
+
+    while (publicKey_ < phi)
+    {
+        track = gcd(publicKey_, phi);
+
+        if (track == 1)
+        {
+            break;
+        }
+        else
+        {
+            publicKey_++;
+        }
+    }
+    //private key
+    //choosing d such that it satisfies d*e = 1 mod phi
+
+    double d1 = 1 / publicKey_;
+    privateKey_ = fmod(d1, phi);
+    
 }
 
 void LCrypto::encryptData(string data)
@@ -80,10 +76,7 @@ void LCrypto::encryptData(string data)
 
     for (unsigned int i = 0; i < dataSize_; i++)
     {
-        decryptArray[i] = pow((int)data.at(i), publicKey_);
-
         encryptArray_[i] = pow((int)data.at(i), publicKey_);
-
     }
 
     dataPacket_.clear();
@@ -99,8 +92,6 @@ void LCrypto::decryptData(string data)
 {
     int charFound = 0;
 
-    cout << endl << data << " -UNCRYPTED BLOCK";
-
     for (int i = 0; i < data.length(); i++)
     {
         if (data.at(i) == ',')
@@ -114,24 +105,16 @@ void LCrypto::decryptData(string data)
     v1 = data.find(',');
     decryptArray[0] = stod(data.substr(0, v1).c_str());
 
-    cout << endl << decryptArray[0] << " " ;
-
     for (unsigned int i = 1; i < charFound; i++)
     {
         decryptArray[i] = stod(getDataBlock(data).c_str());
-        cout << decryptArray[i] << " ";
     }
-    cout << "-array values" << endl;
    
     for (unsigned int i = 0; i < charFound; i++)
     {
         decryptArray[i] = pow(decryptArray[i], privateKey_);
-        
         data_.at(i) = char(decryptArray[i]);
-
-        cout << data_.at(i);
     }
-    cout << endl <<  "-data decrypted" << endl << endl;;
 }
 
 void LCrypto::setPrivateKey(double key)
