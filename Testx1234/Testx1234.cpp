@@ -14,6 +14,7 @@
 #include "SDL_ttf.h"
 #include "LWindow.h"
 #include "gMatch.h"
+#include "LCrypto.h"
 
 using namespace std;
 
@@ -61,6 +62,7 @@ struct engineParameters
 		bool SEND_THREAD_ACTIVE = false;
 		bool PHYSICS_THREAD_ACTIVE = false;
 		bool RECIVE_THREAD_ACTIVE = false;
+		bool SEND_ENCRYPTION_DATA = false;
 
 	}EXECUTE;
 
@@ -84,7 +86,9 @@ struct engineParameters
 		int sCount;
 		int matchWinnerID;
 		int tmp;
-
+		int ENCRYPTION_ID;
+		
+		string DECRYPT_DATA;
 		stringstream DATAPACKET;
 		stringstream sendFpsSS;
 		stringstream recvFpsSS;
@@ -116,6 +120,7 @@ struct MEMEORY
 	{
 		gMatch Match[MAX_MATCHES];
 		gPlayer Player[MAX_PLAYER_ENTITY];
+		LCrypto Crypto;
 
 	}OBJ;
 
@@ -146,7 +151,8 @@ enum INDENTIFIER_TYPE
 	MATCHING_COMPLETE,
 	MATCH_RESULT,
 	END_OF_PACKET,
-	SET_POSITION
+	SET_POSITION,
+	ENCRYPTION_INFO
 };
 
 
@@ -261,8 +267,6 @@ int sendRemovePacket(int rSocket)
 			{
 				EP.TEMP.matchWinnerID = tempID;
 			}
-
-
 		}
 		else if (MEM.OBJ.Match[i].getIfWaitingForPlayer())
 		{
@@ -334,6 +338,7 @@ int getMatchPlayerRID(int playerID)
 
 bool init()
 {
+
 	bool success = true;
 
 	srand(time(NULL));
@@ -744,6 +749,23 @@ static int sendDataToClient(void* ptr)
 			sendRemovePacket(removeID);
 			EP.EXECUTE.SEND_REMOVE_PACKET = false;
 		}
+		if (EP.EXECUTE.SEND_ENCRYPTION_DATA)
+		{
+			cout << endl << "SEND ENC";
+
+			EP.TEMP.DATAPACKET.clear();
+			EP.TEMP.DATAPACKET.str(string());
+			EP.TEMP.DATAPACKET << ENCRYPTION_INFO << "," << MEM.OBJ.Crypto.getModulus() << "," << MEM.OBJ.Crypto.getPublicKey() << "," << END_OF_PACKET;
+
+			for (int i = 0; i < MAX_PLAYER_ENTITY; i++)
+			{
+				if (MEM.OBJ.Player[i].getRequireInit())
+				{
+					sendPacketToClient(EP.TEMP.ENCRYPTION_ID, EP.TEMP.DATAPACKET.str());
+				}
+			}
+			EP.EXECUTE.SEND_ENCRYPTION_DATA = false;
+		}
 		if (EP.EXECUTE.DAMAGE_PLAYER)
 		{
 			//PLDMG,[THE ONE DAMAGED],[THE ONE THAT DOES THE DAMAGE],[DAMAGE AMMOUNT]
@@ -865,7 +887,6 @@ static int sendDataToClient(void* ptr)
 						sendPacketToClient(MEM.OBJ.Match[i].getPlayerID(1), EP.TEMP.DATAPACKET.str());
 					}
 						
-
 					MEM.OBJ.Match[i].setIfIsOnGoing(true);
 					MEM.OBJ.Match[i].setIfReqLaunch(false);
 
@@ -994,15 +1015,22 @@ static int sendDataToClient(void* ptr)
 	}
 }
 
-void processRecivedPacket(const string &data)
+void processRecivedPacket(const string &encryptedData)
 {
 	bool TASK_DONE = false;
 	int ARID;
 
-	v1 = data.find(',');
-	sIdentifier = data.substr(0, v1);
-	id = getFinalData(data);
-	nick = getFinalData(data);
+	//cout << endl << encryptedData;
+
+	MEM.OBJ.Crypto.decryptData(encryptedData);
+	EP.TEMP.DECRYPT_DATA = MEM.OBJ.Crypto.getData();
+
+	//cout << endl << EP.TEMP.DECRYPT_DATA << "- DECRYPTED DATA";
+
+	v1 = EP.TEMP.DECRYPT_DATA.find(',');
+	sIdentifier = EP.TEMP.DECRYPT_DATA.substr(0, v1);
+	id = getFinalData(EP.TEMP.DECRYPT_DATA);
+	nick = getFinalData(EP.TEMP.DECRYPT_DATA);
 
 	identifier = atoi(sIdentifier.c_str());
 
@@ -1031,10 +1059,10 @@ void processRecivedPacket(const string &data)
 	}
 	else if (identifier == GET_DATA_ABOUT_PLAYER) //UPDATE PLAYER WITH INFO FROM CLIENT
 	{
-		posX = getFinalData(data);
-		posY = getFinalData(data);
-		flipType = getFinalData(data);
-		animType = getFinalData(data);
+		posX = getFinalData(EP.TEMP.DECRYPT_DATA);
+		posY = getFinalData(EP.TEMP.DECRYPT_DATA);
+		flipType = getFinalData(EP.TEMP.DECRYPT_DATA);
+		animType = getFinalData(EP.TEMP.DECRYPT_DATA);
 
 		for (int i = 0; i < MAX_PLAYER_ENTITY; i++)
 		{
@@ -1095,8 +1123,7 @@ void processRecivedPacket(const string &data)
 	}
 	else if (identifier == START_MATCHMAKING)
 	{
-
-		int matchingType = atoi(getFinalData(data).c_str());
+		int matchingType = atoi(getFinalData(EP.TEMP.DECRYPT_DATA).c_str());
 		bool matchedPlayer = false;
 
 		EP.TEMP.relativeID = getMatchPlayerRID(atoi(id.c_str()));
@@ -1146,7 +1173,7 @@ void processRecivedPacket(const string &data)
 				if (!MEM.OBJ.Match[i].getIfInit())
 				{
 					MEM.OBJ.Match[i].setIfSlotUsed(0, true);
-					MEM.OBJ.Match[i].setPlayerID(0,EP.TEMP.relativeID);
+					MEM.OBJ.Match[i].setPlayerID(0, EP.TEMP.relativeID);
 					MEM.OBJ.Match[i].setIfIsWaitingForPlayer(true);
 					MEM.OBJ.Match[i].setMatchingType(matchingType);
 					MEM.OBJ.Match[i].setIfInit(true);
@@ -1158,15 +1185,15 @@ void processRecivedPacket(const string &data)
 		}
 	}
 
-	sIdentifier = getFinalData(data);
+	sIdentifier = getFinalData(EP.TEMP.DECRYPT_DATA);
 	identifier = atoi(sIdentifier.c_str());
-	
+
 	if (identifier == UPDATE_BULLET)
 	{
-		posX = getFinalData(data);
-		posY = getFinalData(data);
-		posX2 = getFinalData(data);
-		posY2 = getFinalData(data);
+		posX = getFinalData(EP.TEMP.DECRYPT_DATA);
+		posY = getFinalData(EP.TEMP.DECRYPT_DATA);
+		posX2 = getFinalData(EP.TEMP.DECRYPT_DATA);
+		posY2 = getFinalData(EP.TEMP.DECRYPT_DATA);
 
 		for (int i = 0; i < MAX_PLAYER_ENTITY; i++)
 		{
@@ -1184,8 +1211,8 @@ void processRecivedPacket(const string &data)
 
 						MEM.OBJ.Player[i].gProjectile[j].DISTANCE = sqrt(pow(atoi(posX2.c_str()) - atoi(posX.c_str()), 2) + pow(atoi(posY2.c_str()) - atoi(posY.c_str()), 2));
 
-						MEM.OBJ.Player[i].gProjectile[j].setVelX((EP.GSYS.projSpeed / MEM.OBJ.Player[i].gProjectile[j].DISTANCE)* (atoi(posX2.c_str()) - atoi(posX.c_str())));
-						MEM.OBJ.Player[i].gProjectile[j].setVelY((EP.GSYS.projSpeed / MEM.OBJ.Player[i].gProjectile[j].DISTANCE)* (atoi(posY2.c_str()) - atoi(posY.c_str())));
+						MEM.OBJ.Player[i].gProjectile[j].setVelX((EP.GSYS.projSpeed / MEM.OBJ.Player[i].gProjectile[j].DISTANCE) * (atoi(posX2.c_str()) - atoi(posX.c_str())));
+						MEM.OBJ.Player[i].gProjectile[j].setVelY((EP.GSYS.projSpeed / MEM.OBJ.Player[i].gProjectile[j].DISTANCE) * (atoi(posY2.c_str()) - atoi(posY.c_str())));
 
 						newProjectilePlayerID = i;
 						newProjectileID = j;
@@ -1196,14 +1223,14 @@ void processRecivedPacket(const string &data)
 			}
 		}
 		sendNewProjectile = true;
-		
-		sIdentifier = getFinalData(data);
+
+		sIdentifier = getFinalData(EP.TEMP.DECRYPT_DATA);
 		identifier = atoi(sIdentifier.c_str());
 	}
 	collisionFound = false;
 
 	EP.TEMP.recvDataSS.clear();
-	EP.TEMP.recvDataSS.str(data);
+	EP.TEMP.recvDataSS.str(EP.TEMP.DECRYPT_DATA);
 
 	//Calculate tickRate
 
@@ -1245,6 +1272,8 @@ static int runServerThread(void* ptr)
 					cout << endl << "SOCKET CONNECTED ON ID " << i;
 					MEM.OBJ.Player[i].setSlotUsed(true);
 					MEM.OBJ.Player[i].setRequireInit(true);
+					EP.EXECUTE.SEND_ENCRYPTION_DATA = true;
+					EP.TEMP.ENCRYPTION_ID = i;
 				}
 				break;
 			}

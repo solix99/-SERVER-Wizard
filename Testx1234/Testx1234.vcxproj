@@ -161,6 +161,7 @@
     <ClInclude Include="gMatch.h" />
     <ClInclude Include="gPlayer.h" />
     <ClInclude Include="LAnim.h" />
+    <ClInclude Include="LCrypto.h" />
     <ClInclude Include="LProjectile.h" />
     <ClInclude Include="Ltexture.h" />
     <ClInclude Include="LTimer.h" />
@@ -171,6 +172,7 @@
     <ClCompile Include="gMatch.cpp" />
     <ClCompile Include="gPlayer.cpp" />
     <ClCompile Include="LAnim.cpp" />
+    <ClCompile Include="LCrypto.cpp" />
     <ClCompile Include="LProjectile.cpp" />
     <ClCompile Include="Ltexture.cpp" />
     <ClCompile Include="LTimer.cpp" />
