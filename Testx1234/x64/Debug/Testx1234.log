@@ -1,0 +1,86 @@
+﻿  pch.cpp
+  LAnim.cpp
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(25,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(27,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(54,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(56,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(72,33): warning C4018: '>': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(103,34): warning C4018: '>': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(126,34): warning C4018: '>': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(195,37): warning C4018: '>': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(210,37): warning C4018: '>': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(235,36): warning C4018: '>': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(251,36): warning C4018: '>': signed/unsigned mismatch
+  LCrypto.cpp
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(7,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(17,36): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(33,36): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(54,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(54,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(75,28): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(77,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(85,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(105,19): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(108,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(113,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(161,19): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  LProjectile.cpp
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LProjectile.cpp(103,17): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LProjectile.cpp(104,17): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LProjectile.cpp(106,34): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LProjectile.cpp(107,34): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LProjectile.cpp(148,9): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LProjectile.cpp(152,9): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LProjectile.cpp(169,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LProjectile.cpp(170,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LProjectile.cpp(175,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LProjectile.cpp(176,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  LTimer.cpp
+  LWindow.cpp
+  Ltexture.cpp
+  Testx1234.cpp
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(209,49): warning C4018: '>': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(217,47): warning C4018: '>': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(296,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(344,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(350,6): warning C4101: 'temp': unreferenced local variable
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(430,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(434,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(637,16): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(697,15): warning C4101: 'iSendResult': unreferenced local variable
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(805,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(821,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(1027,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(1077,34): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(1081,38): warning C4018: '<': signed/unsigned mismatch
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(1204,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(1205,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(1209,55): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(1023,6): warning C4101: 'ARID': unreferenced local variable
+  gMatch.cpp
+  gPlayer.cpp
+  Running Code Analysis for C/C++...
+  Generating Code...
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(337): warning C4715: 'getMatchPlayerRID': not all control paths return a value
+  Testx1234.vcxproj -> C:\Users\mariu\source\repos\-SERVER-Wizard\x64\Debug\Testx1234.exe
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\gMatch.cpp(6): warning C26495: Variable 'gMatch::matchID' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(5): warning C26495: Variable 'LAnim::cropPosX' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(40): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(40): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LAnim.cpp(42): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(46): warning C26451: Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(46): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(161): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(162): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(162): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LCrypto.cpp(162): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LProjectile.cpp(4): warning C26495: Variable 'LProjectile::DISTANCE' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\LWindow.cpp(5): warning C26495: Variable 'LWindow::mWindow' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(52): warning C26495: Variable 'engineParameters::GAMESYSTEM::e' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(99): warning C26495: Variable 'engineParameters::TEMPORAL::projectileX' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(118): warning C26495: Variable 'MEMEORY::FONT::fpsColor' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(134): warning C26495: Variable 'MAPLIST::MAP_SIZE' is uninitialized. Always initialize a member variable (type.6).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(637): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(638): warning C26451: Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(638): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\Testx1234.cpp(638): warning C26451: Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2).

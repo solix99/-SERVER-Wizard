@@ -1,0 +1,221 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/mariu/source/repos/-SERVER-Wizard/Testx1234/LCrypto.cpp"
+                },
+                "region": {
+                  "startLine": 46,
+                  "startColumn": 19,
+                  "endLine": 46,
+                  "endColumn": 33
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "LCrypto::{ctor}",
+                  "decoratedName": "??0LCrypto@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/mariu/source/repos/-SERVER-Wizard/Testx1234/LCrypto.cpp"
+                },
+                "region": {
+                  "startLine": 46,
+                  "startColumn": 19,
+                  "endLine": 46,
+                  "endColumn": 23
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "LCrypto::{ctor}",
+                  "decoratedName": "??0LCrypto@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/mariu/source/repos/-SERVER-Wizard/Testx1234/LCrypto.cpp"
+                },
+                "region": {
+                  "startLine": 161,
+                  "startColumn": 25,
+                  "endLine": 161,
+                  "endColumn": 30
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "LCrypto::getDataBlock",
+                  "decoratedName": "?getDataBlock@LCrypto@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV23@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/mariu/source/repos/-SERVER-Wizard/Testx1234/LCrypto.cpp"
+                },
+                "region": {
+                  "startLine": 162,
+                  "startColumn": 24,
+                  "endLine": 162,
+                  "endColumn": 29
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "LCrypto::getDataBlock",
+                  "decoratedName": "?getDataBlock@LCrypto@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV23@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/mariu/source/repos/-SERVER-Wizard/Testx1234/LCrypto.cpp"
+                },
+                "region": {
+                  "startLine": 162,
+                  "startColumn": 32,
+                  "endLine": 162,
+                  "endColumn": 42
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "LCrypto::getDataBlock",
+                  "decoratedName": "?getDataBlock@LCrypto@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV23@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/mariu/source/repos/-SERVER-Wizard/Testx1234/LCrypto.cpp"
+                },
+                "region": {
+                  "startLine": 162,
+                  "startColumn": 32,
+                  "endLine": 162,
+                  "endColumn": 37
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "LCrypto::getDataBlock",
+                  "decoratedName": "?getDataBlock@LCrypto@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV23@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.36.32535.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/mariu/source/repos/-SERVER-Wizard/Testx1234/LCrypto.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "817aae48bdd1665a14560b44c53bf279222e8f83361b71ba99769f5e92d3c888"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/mariu/source/repos/-server-wizard/testx1234/pch.h"
+          },
+          "hashes": {
+            "sha-256": "db86c540dfe8cbf47e4c98207295872beec3e1eadec7db99a817f4bbb3baaa5f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/mariu/source/repos/-server-wizard/testx1234/lcrypto.h"
+          },
+          "hashes": {
+            "sha-256": "f7a4b61cda0642792e54d39135a80d35ca15392d7b78c7d0bcade11dc19e8fe1"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+C:\Users\mariu\source\repos\-SERVER-Wizard\x64\Debug\Testx1234.exe.lastcodeanalysissucceeded
+C:\Users\mariu\source\repos\-SERVER-Wizard\Testx1234\x64\Debug\NativeCodeAnalysis.read.1.tlog
